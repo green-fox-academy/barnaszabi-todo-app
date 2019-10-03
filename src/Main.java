@@ -3,13 +3,12 @@ import java.util.List;
 public class Main {
   public static void main(String[] args) {
     FileManipulation fileManipulation = new FileManipulation();
-    List<String> tasks = fileManipulation.readFromFile();
+    List<Task> tasks = fileManipulation.readFromFile();
     if (args.length == 0){
       StartApp startApp = new StartApp();
       startApp.opening();
     }else if (args[0].equals("-l")){
       Listing listing = new Listing();
-      fileManipulation.readFromFile();
       if (tasks.size() != 0){
         listing.ListAll(tasks);
       }else {
@@ -19,10 +18,18 @@ public class Main {
       Adding adding = new Adding();
       if (args.length == 2){
         adding.addTasks(tasks, args[1]);
-        fileManipulation.saveToFile();
+        fileManipulation.saveToFile(tasks);
       }else {
-        adding.addTasks(tasks, "");
+        System.out.println("Unable to add: no task provided");
       }
+    }else if (args[0].equals("-r")){
+      Removing removing = new Removing();
+      removing.removeTasks(tasks, args[1]);
+      fileManipulation.saveToFile(tasks);
+    }else if (args[0].equals("-c")){
+      Checking checking = new Checking();
+      checking.checkTask(args[1],tasks);
+      fileManipulation.saveToFile(tasks);
     }
   }
 }

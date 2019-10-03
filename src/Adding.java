@@ -2,11 +2,7 @@ import java.util.List;
 
 public class Adding {
 
-  public void addTasks(List<String> tasks, String task){
-    if (task == ""){
-      System.out.println("Unable to add: no task provided");
-    }else {
-      tasks.add(task);
-    }
+  public void addTasks(List<Task> tasks, String taskDescription){
+      tasks.add(new Task(taskDescription,String.valueOf(tasks.size()+1),false));
   }
 }
