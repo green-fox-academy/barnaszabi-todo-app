@@ -5,8 +5,8 @@ public class Main {
   public static void main(String[] args) {
     FileManipulation fileManipulation = new FileManipulation();
     List<Task> tasks = fileManipulation.readFromFile();
+    StartApp startApp = new StartApp();
     if (args.length == 0){
-      StartApp startApp = new StartApp();
       startApp.opening();
     }else {
       if (Arrays.asList("-l", "-r", "-c", "-a").contains(args[0])){
@@ -36,6 +36,7 @@ public class Main {
         }
       }else {
         System.out.println("Unsupported argument");
+        startApp.opening();
       }
     }
   }
